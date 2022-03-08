@@ -19,8 +19,8 @@ class RAWGController {
         res.status(200).json(list);
     }
     async getGameById(req, res) {
-        const gameId = parseId(req.url)
-        const gameResponse = await fetchGameById(this.url,this.key, gameId);
+        const {id} = req.params;
+        const gameResponse = await fetchGameById(this.url,this.key, id);
         const game = parseGame(gameResponse.data);
         res.status(200).json(game)
     }
