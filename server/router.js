@@ -7,8 +7,6 @@ const router = new Router();
 RAWG_Controller.getAllGames = RAWG_Controller.getAllGames.bind(RAWG_Controller);
 RAWG_Controller.getGameById = RAWG_Controller.getGameById.bind(RAWG_Controller);
 
-MongoController.getAllPosts = MongoController.getAllPosts.bind(MongoController);
-MongoController.getPostById = MongoController.getPostById.bind(MongoController);
 MongoController.getHotPosts = MongoController.getHotPosts.bind(MongoController);
 MongoController.createPost = MongoController.createPost.bind(MongoController);
 
@@ -19,6 +17,8 @@ router.get('/posts', MongoController.getAllPosts)
 router.get('/posts/:id', MongoController.getPostById)
 router.get('/hot-posts', MongoController.getHotPosts)
 router.post('/posts', MongoController.createPost)
+router.put('/posts/:id', MongoController.putPost);
+router.delete('/posts/:id', MongoController.deletePost)
 
 router.post('/admin', (req,res) => {
     res.send('there must be verification')

@@ -11,9 +11,11 @@ const DB_URL = 'mongodb+srv://admin:CGa672WYK3BWL5uh@cluster0.naiih.mongodb.net/
 const app = express();
 
 app.use(express.json())
+app.use(express.static('static'))
 app.use(fileUpload({}))
 app.use(cors())
 app.use('/api', router);
+
 
 const start = async () => {
     try {

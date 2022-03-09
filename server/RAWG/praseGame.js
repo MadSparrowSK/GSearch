@@ -6,13 +6,13 @@ module.exports = parseGame = (game) => {
     parsedGame['metacritic'] = game['metacritic'] || 0;
     parsedGame['released'] = game['released'];
     parsedGame['background_image'] = game['background_image'];
-    parsedGame['platform'] = game['platform'];
-    parsedGame['stored'] = game['stored'];
+    parsedGame['platforms'] = game['platforms'];
+    parsedGame['stores'] = game['stores'];
     parsedGame['developers'] = game['developers'];
     parsedGame['genres'] = game['genres'];
     parsedGame['tags'] = game['tags'];
     parsedGame['publishers'] = game['publishers'];
-    parsedGame['erb_rating'] = game['erb_rating']
+    parsedGame['esrb_rating'] = game['esrb_rating'] || "?";
     parsedGame['description_raw'] = game['description_raw']
 
     return parsedGame;
