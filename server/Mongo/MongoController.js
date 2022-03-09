@@ -27,16 +27,22 @@ class MongoController {
         }
     }
     async getHotPosts(req,res) {
-        this.emitter.once('hotPosts', (post) => {
-            res.status(200).json(post)
+        res.status(200);
+        res.set({
+            'Connection':'keep-alive',
+            'Content-Type': 'text/event-stream; charset=utf-8',
+            'Cache-Control': 'no-cache'
+        })
+        this.emitter.on('hotPosts', (post) => {
+            res.write(`data: ${JSON.stringify(post)} \n\n`);
         })
     }
     async createPost(req, res) {
        try {
-           const {author, title, description, isHotPost, content} = req.body;
+           const {author, title, description, isHotPost, content, sub_title} = req.body;
            const title_slug = makeSlug(title);
            const fileName = await FileService.uploadImage(req.files, title_slug);
-           const post = await MongoService.create({author, title, description, image: fileName, title_slug, content});
+           const post = await MongoService.create({author, title, description, image: fileName, title_slug, content, sub_title});
            if(isHotPost)
                 this.emitter.emit('hotPosts', post);
            res.status(200).json(post);
@@ -47,13 +53,13 @@ class MongoController {
     async putPost(req,res) {
         try {
             const {id} = req.params;
-            const {author, title, description, content} = req.body;
+            const {author, title, description, content, sub_title} = req.body;
             const title_slug = makeSlug(title);
             let fileName = "";
             if(req.files) {
                    fileName = await FileService.uploadImage(req.files, title_slug)
             }
-            const post = await MongoService.put(id, {author, title, title_slug, description, content, image: fileName});
+            const post = await MongoService.put(id, {author, title, title_slug, description, content, image: fileName, sub_title});
             res.status(200).json(post);
         } catch (e) {
             res.status(404).json(e)
