@@ -3,7 +3,9 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 
-const router = require('./router');
+const gameRouter = require('./Routers/game-router');
+const postsRouter = require('./Routers/posts-router');
+const adminRouter = require('./Routers/admin-router');
 
 const PORT = 5000;
 const DB_URL = 'mongodb+srv://admin:CGa672WYK3BWL5uh@cluster0.naiih.mongodb.net/GSearch?retryWrites=true&w=majority'
@@ -14,7 +16,9 @@ app.use(express.json())
 app.use(express.static('static'))
 app.use(fileUpload({}))
 app.use(cors())
-app.use('/api', router);
+app.use('/game-api', gameRouter);
+app.use('/posts-api', postsRouter);
+app.use(adminRouter);
 
 
 const start = async () => {
