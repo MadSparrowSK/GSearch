@@ -6,6 +6,9 @@ const adminRouter = new Router();
 adminRouter.get('/admin', (req, res) => {
     res.status(200).json({message: 'welcome to admin page'});
 })
+adminRouter.post('/admin', (req,res) => {
+    res.status(200).json({message: "OK"})
+})
 
 adminRouter.get('/admin/*', (req,res) => {
     res.status(400).json({message:"ERROR 400 BAD REQUEST"})

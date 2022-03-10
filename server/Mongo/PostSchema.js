@@ -8,6 +8,7 @@ const Post = new Schema({
     description: {type: String, default: ""},
     content: { type:String, required:true },
     image: { type:String },
+    filter: { type: String, required: true }
 })
 
 module.exports = model('Post', Post);
