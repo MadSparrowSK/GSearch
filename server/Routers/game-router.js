@@ -8,5 +8,8 @@ const gameRouter = new Router();
 
 gameRouter.get('/games', RAWG_Controller.getAllGames)
 gameRouter.get('/games/:id', RAWG_Controller.getGameById)
+gameRouter.get('/games/:id', (req,res) => {
+    res.status(400).json({message:"Error 400 BAD REQUEST"});
+})
 
 module.exports = gameRouter;

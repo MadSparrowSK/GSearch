@@ -13,4 +13,8 @@ postsRouter.post('/posts', MongoController.createPost)
 postsRouter.put('/posts/:id', MongoController.putPost);
 postsRouter.delete('/posts/:id', MongoController.deletePost)
 
+postsRouter.get('/posts/:id/*', (req,res) => {
+    res.status(400).json({ message: "ERROR 400 BAD REQUEST" })
+})
+
 module.exports = postsRouter;
