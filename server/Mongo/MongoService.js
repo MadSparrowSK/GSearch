@@ -11,6 +11,13 @@ class MongoService {
         const post = await Post.find({_id:id})
         return post;
     }
+    async findByType(type) {
+        const post = await Post.find({type});
+        return post;
+    }
+    async findByName(name) {
+        return {}
+    }
     async create(post) {
         if(await this._checkForPost({sub_title: post.sub_title})) {
             return { message: `Post with sub-title '${post.sub_title}' already exist` }

@@ -1,34 +1,18 @@
 import './App.css';
-import {useEffect, useRef, useState} from "react";
-import axios from "axios";
+import Header from "./Header/Header";
+import './App.css';
+import './assets/fonts/fonts.css'
+import PostsPage from "./PostsPage/PostsPage";
+import Footer from "./Footer/Footer";
 
 function App() {
-  const [hotPosts, setHotPosts] = useState([]);
-
-  useEffect(()=> {
-      subscribe();
-  }, [])
-
-  const subscribe = async () => {
-     /* const response = await axios.get('http://localhost:5000/api/posts');
-      console.log(response)*/
-      const post =  new EventSource('http://localhost:5000/api/hot-posts');
-      post.onmessage = (event) => {
-          const data = JSON.parse(event.data);
-          console.log(data)
-      }
-      post.onopen = (e) => {
-          console.log(e)
-      }
-      post.onerror = (e) => {
-          console.log(e)
-      }
-  }
-
-  return (
-    <div>
-    </div>
-  );
+    return (
+        <div>
+            <Header/>
+            <PostsPage />
+            <Footer />
+        </div>
+    );
 }
 
 export default App;

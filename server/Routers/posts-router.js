@@ -7,6 +7,8 @@ MongoController.createPost = MongoController.createPost.bind(MongoController);
 const postsRouter = new Router();
 
 postsRouter.get('/posts', MongoController.getAllPosts)
+postsRouter.get('/posts/:type', MongoController.getPostsByType);
+postsRouter.get('/posts/:type/:name', MongoController.getPostByName)
 postsRouter.get('/posts/:id', MongoController.getPostById)
 postsRouter.get('/hot-posts', MongoController.getHotPosts)
 postsRouter.post('/posts', MongoController.createPost)

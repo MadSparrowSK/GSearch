@@ -1,0 +1,98 @@
+.header {
+    width: 100%;
+    height: 60px;
+    background: #000518;
+    display: flex;
+}
+.headerContainer {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.leftHeaderSide {
+    display: flex;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: #FFF;
+}
+
+.searchBar {
+    position: relative;
+    left: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.searchBar div input {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    border: none;
+    padding: 10px;
+    width: 345px;
+    color: #fff;
+    outline: none;
+    background: #040C2B;
+    border-radius: 10px;
+}
+.searchBarImage {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    bottom: 0;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: transparent;
+}
+.pages {
+    position: relative;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    height: 100%;
+}
+.pages .navBar {
+    height: 100%;
+}
+.pages ul {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pages ul li {
+    font-family: Raleway,sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    height: 100%;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+}
+.currentPage {
+    font-weight: 700 !important;
+}
+
+.point {
+    position: absolute;
+    bottom: 5px;
+    left: 50px;
+    z-index: 2;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFC700;
+    filter: blur(1px);
+    box-shadow: 0 0 5px 4px rgba(255, 199, 0, 0.6);
+    transition: all .3s ease-in-out;
+}

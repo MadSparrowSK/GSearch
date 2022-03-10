@@ -1,0 +1,14 @@
+.lastNews {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.posts {
+    color: #fff;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
