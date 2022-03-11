@@ -9,7 +9,9 @@ const Post = new Schema({
     content: { type:String, required:true },
     image: { type:String },
     type: { type: String, required: true },
-    date: { type: Date, required:true }
+    date: { type: Date, required:true },
+    numberGlobal: { type: Number, required:true },
+    numberByType: { type: Number, required:true }
 })
 
 module.exports = model('Post', Post);

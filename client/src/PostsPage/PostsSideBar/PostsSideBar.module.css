@@ -37,4 +37,13 @@
     font-weight: 500;
     font-size: 16px;
     padding: 10px 0;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.postsSideBar .postsNavBar ul li:hover {
+    font-weight: 700;
+}
+
+.active {
+    font-weight: 700 !important;
 }

@@ -4,16 +4,30 @@ class MongoService {
     async find() {
         return Post.find();
     }
+    async findByPage(limit = 10, page = 1) {
+        if(page < 1) throw new Error('Page cannot be lower than 1');
+
+        const min = page * limit - limit;
+        const max = page * limit + 1;
+
+        return Post.find({numberGlobal: {$gt:min, $lt: max}}).limit(limit);
+    }
     async findById(id) {
         if(!id) {
             throw new Error("Id not found")
         }
-        const post = await Post.find({_id:id})
-        return post;
+        return Post.find({_id: id});
     }
     async findByType(type) {
-        const post = await Post.find({type});
-        return post;
+        return Post.find({type});
+    }
+    async findByTypePage(type, limit, page) {
+        if(page < 1) throw new Error('Page cannot be lower than 1');
+
+        const min = page * limit - limit;
+        const max = page * limit - 1;
+
+        return Post.find({numberByType: {$gt:min, $lt:max} }).limit(limit);
     }
     async findByName(name) {
         return {}
@@ -22,22 +36,22 @@ class MongoService {
         if(await this._checkForPost({sub_title: post.sub_title})) {
             return { message: `Post with sub-title '${post.sub_title}' already exist` }
         }
-        const newPost = await Post.create(post);
-        return newPost;
+        return Post.create(post);
     }
     async put(id,post) {
         if(await this._checkForPost({sub_title: post.sub_title})) {
             return { message: `Post with sub-title '${post.sub_title}' already exist` }
         }
-        const uPost = await Post.findByIdAndUpdate({_id:id}, post)
-        return uPost;
+        return Post.findByIdAndUpdate({_id: id}, post);
     }
     async delete(id) {
         if(!id) {
             throw new Error('id not defined')
         }
-        const deletePost = await Post.findByIdAndRemove({_id:id})
-        return deletePost;
+        return Post.findByIdAndRemove({_id: id});
+    }
+    async _deleteAll() {
+        await Post.deleteMany({});
     }
 
     async _checkForPost(obj) {

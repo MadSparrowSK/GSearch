@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
+
 import classes from "./PostPage.module.css";
 
 import LastPost from "./lastPost/LastPost";
 import PostsSideBar from "./PostsSideBar/PostsSideBar";
 import PostsList from "./PostsList/PostsList";
+import Loader from "../Loader/Loader";
+
 import axios from "axios";
 
 const PostsPage = () => {
+
+    let eventSource = null;
 
     const [posts, setPosts] = useState([]);
 
@@ -15,7 +20,12 @@ const PostsPage = () => {
     }, [])
 
     const firstFetchPosts = async () => {
-        const response = await axios.get('http://localhost:5000/posts-api/posts');
+        const test = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10&page=1');
+        const response = await axios.get('http://localhost:5000/posts-api/posts', {
+            params: {
+                _limit: 10
+            }
+        });
         const data = await response.data;
         setPosts(data);
     }
@@ -31,8 +41,23 @@ const PostsPage = () => {
         setPosts(data);
     }
 
-    const resetPosts = () => {
-        setPosts([])
+    const findMemes = async () => {
+        const response = await axios.get("http://localhost:5000/posts-api/posts/memes")
+        const data = await response.data;
+        setPosts(data);
+    }
+
+
+    const hotNews = async () => {
+        /*setPosts([]);
+        eventSource = new EventSource("http://localhost:5000/posts-api/hot-posts");
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            setPosts(prev => [data, ...prev]);
+        }*/
+    }
+    const unsubscribeHotPost = () => {
+        //eventSource?.close();
     }
 
     return (
@@ -42,8 +67,12 @@ const PostsPage = () => {
                 <LastPost/>
             </div>
             <div className={classes.posts}>
-                <PostsSideBar findGears={findGears} findGames={findGames}/>
-                <PostsList posts={posts}/>
+                <PostsSideBar findGears={findGears} findGames={findGames} findMemes={findMemes} hotNews={hotNews} unsubscribeHotPost={unsubscribeHotPost}/>
+                {
+                    posts.length
+                        ? <PostsList posts={posts}/>
+                        : <Loader />
+                }
             </div>
         </div>
     );

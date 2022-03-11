@@ -1,0 +1,19 @@
+.loader {
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    filter: drop-shadow(2px 2px 1px #0066FF) drop-shadow(-2px -2px 1px #0094FF)
+    drop-shadow(2px 5px 1px #0066FF) drop-shadow(-2px -5px 1px #0094FF);
+    animation: rotate infinite 2ms;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
