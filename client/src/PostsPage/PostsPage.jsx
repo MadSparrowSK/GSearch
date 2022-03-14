@@ -10,41 +10,51 @@ import Loader from "../Loader/Loader";
 import axios from "axios";
 
 const PostsPage = () => {
-
-    let eventSource = null;
-
     const [posts, setPosts] = useState([]);
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         firstFetchPosts();
     }, [])
 
     const firstFetchPosts = async () => {
-        const test = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10&page=1');
         const response = await axios.get('http://localhost:5000/posts-api/posts', {
             params: {
-                _limit: 10
+                limit,
+                page,
             }
         });
         const data = await response.data;
         setPosts(data);
     }
 
-    const findGears = async () => {
-        const response = await axios.get('http://localhost:5000/posts-api/posts/gears')
+    const fetchPosts = async () => {
+        setPage(page + 1);
+        const response = await axios.get('http://localhost:5000/posts-api/posts', {
+            params: {
+                limit,
+                page,
+            }
+        });
         const data = await response.data;
-        setPosts(data);
+        setPosts([...posts, data]);
+    }
+    const findGears = async () => {
+       /* const response = await axios.get('http://localhost:5000/posts-api/posts/gears')
+        const data = await response.data;
+        setPosts(data);*/
     }
     const findGames = async () => {
-        const response = await axios.get('http://localhost:5000/posts-api/posts/game')
+        /*const response = await axios.get('http://localhost:5000/posts-api/posts/game')
         const data = await response.data;
-        setPosts(data);
+        setPosts(data);*/
     }
 
     const findMemes = async () => {
-        const response = await axios.get("http://localhost:5000/posts-api/posts/memes")
+       /* const response = await axios.get("http://localhost:5000/posts-api/posts/memes")
         const data = await response.data;
-        setPosts(data);
+        setPosts(data);*/
     }
 
 
@@ -69,11 +79,12 @@ const PostsPage = () => {
             <div className={classes.posts}>
                 <PostsSideBar findGears={findGears} findGames={findGames} findMemes={findMemes} hotNews={hotNews} unsubscribeHotPost={unsubscribeHotPost}/>
                 {
-                    posts.length
-                        ? <PostsList posts={posts}/>
+                    posts
+                        ? posts.length ? <PostsList posts={posts}/> : <h1>Empty</h1>
                         : <Loader />
                 }
             </div>
+            <button onClick={fetchPosts}>Download more</button>
         </div>
     );
 };

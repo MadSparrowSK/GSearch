@@ -13,9 +13,9 @@ class MongoController {
 
     async getAllPosts(req, res) {
         try {
-            const {_limit, page} = req.query;
+            const {limit, page} = req.query;
             const countPosts = await postCount({});
-            const posts = !_limit ? await MongoService.find() : await MongoService.findByPage(_limit, page);
+            const posts = !limit ? await MongoService.find() : await MongoService.findByPage(limit, page);
             res.set({'x-total-count': countPosts})
             res.status(200).json(posts)
         } catch (e) {
@@ -33,10 +33,10 @@ class MongoController {
     }
     async getPostsByType(req,res)
     {
-        const {_limit, page} = req.params;
+        const {limit, page} = req.params;
         const {type} = req.params;
         const countPosts = postCount({type})
-        const posts = !_limit ? await MongoService.findByType(type) : await MongoService.findByTypePage(type, _limit, page);
+        const posts = !limit ? await MongoService.findByType(type) : await MongoService.findByTypePage(type, limit, page);
         res.set({'x-total-count': countPosts})
         res.status(200).json(posts)
     }
@@ -58,7 +58,7 @@ class MongoController {
        try {
            const postObjToCreate = parseEntryObject(req.body)
            postObjToCreate.title_slug = makeSlug(postObjToCreate.title);
-           postObjToCreate.fileName = await FileService.uploadImage(req.files, postObjToCreate.title_slug);
+           postObjToCreate.image = await FileService.uploadImage(req.files, postObjToCreate.title_slug);
            postObjToCreate.date = new Date().toLocaleDateString();
            postObjToCreate.numberGlobal = await postCount({}) + 1;
            postObjToCreate.numberByType = await postCount({type:postObjToCreate.type}) + 1;
@@ -96,8 +96,9 @@ class MongoController {
             res.status(404).json(e)
         }
     }
-    async _deleteAllPosts() {
+    async _deleteAllPosts(req,res) {
         await MongoService._deleteAll();
+        res.status(200).json({message: "Database was cleared"})
     }
 }
 
