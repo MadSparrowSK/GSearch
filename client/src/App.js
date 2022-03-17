@@ -1,18 +1,28 @@
 import './App.css';
-import Header from "./Header/Header";
 import './App.css';
 import './assets/fonts/fonts.css'
-import PostsPage from "./PostsPage/PostsPage";
-import Footer from "./Footer/Footer";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Routing from "./components/Routing";
 
 function App() {
     return (
-        <div>
+        <BrowserRouter>
             <Header/>
-            <PostsPage />
-            <Footer />
-        </div>
+            <Routing/>
+            <Footer/>
+        </BrowserRouter>
     );
 }
+/*
+<div>
+    <Header/>
+    <PostsPage />
+    <Footer />
+</div>*/
 
 export default App;

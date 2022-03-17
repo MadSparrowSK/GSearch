@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from "./PostsList.module.css";
 import MiniPost from "./MiniPost/MiniPost";
+import Pagination from "../../Pagination/Pagination";
 
 
-const PostsList = (posts) => {
+const PostsList = ({posts, changePage,arrayPages, page}) => {
 
-    if(!posts['posts']) {
+    if(!posts) {
         return (
             <div className={classes.postsList}>
                 <h1>Loading...</h1>
@@ -16,14 +17,12 @@ const PostsList = (posts) => {
     return (
         <div className={classes.postsList}>
             {
-                    posts.posts.map(post =>
+                    posts.map(post =>
                         <MiniPost post={post} key={post._id}/>
                     )
             }
-            {/*<MiniPost />
-            <MiniPost />
-            <MiniPost />
-            <MiniPost />*/}
+
+            <Pagination changePage={changePage} arrayPages={arrayPages} page={page}/>
         </div>
     );
 };

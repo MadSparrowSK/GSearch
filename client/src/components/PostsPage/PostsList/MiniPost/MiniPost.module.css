@@ -47,17 +47,36 @@
     height: 100%;
 }
 .postDescription {
+    position: relative;
     color: #fff;
     width: 100%;
     height: 100%;
     padding: 20px;
-    font-family: Roboto, sans-serif;
+    font-family: Raleway, sans-serif;
     border-radius: 0 20px 20px 0;
 }
 .title {
+    font-weight: 700;
+}
+.additionalInfo {
+    margin-top: 15px;
     font-weight: 500;
+    display: flex;
+}
+.additionalInfo div:first-child {
+    margin-right: 30px;
 }
 .description {
     margin-top: 20px;
-    font-weight: 400;
+    font-weight: 500;
+    height: 50px;
+    overflow: hidden;
+}
+.disappear {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0deg, #000518 15%, transparent 60%);
 }

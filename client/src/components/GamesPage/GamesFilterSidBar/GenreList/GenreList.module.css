@@ -1,0 +1,29 @@
+.list {
+}
+.name {
+}
+.title, .genreList {
+    font-family: Raleway, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+.title {
+    font-weight: 600;
+}
+.arrow {
+
+}
+.genreList {
+    font-weight: 500;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+.genreList ul li {
+    padding: 10px;
+    border: 2px solid #6A7DFF;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.genreListInvisible {
+    height: 0;
+}

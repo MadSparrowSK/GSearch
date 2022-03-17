@@ -1,0 +1,32 @@
+.sideBar {
+    position: relative;
+    width: 265px;
+    padding: 15px 20px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    filter: drop-shadow(0 0 5px #0066FF);
+}
+.sideBar:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #0094FF;
+    box-shadow: 0 0 1px #0066FF;
+    border-radius: 20px;
+    z-index: -1;
+}
+.sideBar:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #6A7DFF;
+    box-shadow: 0 0 1px #6A7DFF;
+    border-radius: 20px;
+    z-index: -1;
+}

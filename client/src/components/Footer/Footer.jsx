@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BeIcon from "../assets/image/icons/be.svg"
-import gHubIcon from "../assets/image/icons/github-icon.svg"
+import BeIcon from "../../assets/image/icons/be.svg"
+import gHubIcon from "../../assets/image/icons/github-icon.svg"
 
 import classes from "./Footer.module.css"
 

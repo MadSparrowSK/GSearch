@@ -1,0 +1,23 @@
+.paginationBlock {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.block {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #6A7DFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Montserrat, sans-serif;
+    margin-right: 8px;
+    box-shadow: 0 0 4px 1px #6A7DFF;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+.currentPage {
+    background: #6A7DFF;
+}

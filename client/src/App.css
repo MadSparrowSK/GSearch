@@ -8,8 +8,11 @@ ul {
 }
 body {
     background: #000518;
+    color: #fff;
 }
-
+.currentPage {
+    font-weight: 700 !important;
+}
 .container {
     width: 1146px;
     margin: 0 auto;
