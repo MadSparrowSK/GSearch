@@ -16,6 +16,16 @@ app.use(express.json())
 app.use(express.static('static'))
 app.use(fileUpload({}))
 app.use(cors())
+app.use((req,res,next) => {
+    res.set({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Expose-Headers': '*'
+    })
+    next();
+})
+
 app.use('/games-api', gameRouter);
 app.use('/posts-api', postsRouter);
 app.use(adminRouter);
