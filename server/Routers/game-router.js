@@ -1,12 +1,16 @@
 const {Router} = require('express')
-const MongoGameController = require('../Mongo/Controller/MongoGameController')
+const GameController = require('../PostgreSql/Controller/GameController')
 
 const gameRouter = new Router();
 
-gameRouter.get('/games', MongoGameController.getAllGames)
-gameRouter.get('/games/:id', MongoGameController.getGameById)
-/*gameRouter.get('/games/:id', (req,res) => {
-    res.status(400).json({message:"Error 400 BAD REQUEST"});
-})*/
+gameRouter.get('/games', GameController.getAllGames)
+gameRouter.get('/games/:id', GameController.getGameById)
+
+gameRouter.post('/games', GameController.createGame);
+
+gameRouter.put('/games', GameController.updateGameById)
+
+gameRouter.delete('/games', GameController.deleteGameById)
+gameRouter.delete('/games/all', GameController._deleteAllGames)
 
 module.exports = gameRouter;

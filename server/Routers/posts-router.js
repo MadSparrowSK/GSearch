@@ -1,24 +1,17 @@
 const {Router} = require('express')
-const MongoPostController= require('../Mongo/Controller/MongoPostController')
-
+const PostController = require('../PostgreSql/Controller/PostController')
 const postsRouter = new Router();
 
-postsRouter.get('/posts', MongoPostController.getAllPosts)
-postsRouter.get('/posts/:type', MongoPostController.getPostsByType);
-postsRouter.get('/posts/:id', MongoPostController.getPostById)
+postsRouter.get('/posts', PostController.getAllPosts)
+postsRouter.get('/posts/id/:id', PostController.getPostById)
+postsRouter.get('/posts/type/:type', PostController.getPostsByType);
 
-//postsRouter.get('/hot-posts', MongoPostController.getHotPosts)
 
-postsRouter.post('/posts', MongoPostController.createPost)
+postsRouter.post('/posts/create', PostController.createPost)
 
-postsRouter.put('/posts/:id', MongoPostController.updatePostById);
+postsRouter.put('/posts/update/:id', PostController.updatePostById);
 
-postsRouter.delete('/posts/:id', MongoPostController.deletePostById)
-
-postsRouter.get('/delete', MongoPostController._deleteAllPosts)
-
-postsRouter.get('/posts/:id/*', (req,res) => {
-    res.status(400).json({ message: "ERROR 400 BAD REQUEST" })
-})
+postsRouter.delete('/posts/delete/:id', PostController.deletePostById)
+postsRouter.delete('/posts/all', PostController._deleteAllPosts)
 
 module.exports = postsRouter;
