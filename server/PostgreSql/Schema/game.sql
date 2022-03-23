@@ -1,6 +1,17 @@
 CREATE TABLE game (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(50),
+    name VARCHAR(50) UNIQUE,
     description TEXT,
-    image
+    image TEXT,
+    video TEXT,
+    content TEXT,
+    requirements TEXT,
+    tags TEXT,
+    points TEXT,
+    genre TEXT,
+    genre_id INT,
+    platform TEXT,
+    date DATE DEFAULT CURRENT_DATE,
+    developer TEXT,
+    publisher TEXT,
 )

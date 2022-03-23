@@ -4,6 +4,7 @@ const GameController = require('../PostgreSql/Controller/GameController')
 const gameRouter = new Router();
 
 gameRouter.get('/games', GameController.getAllGames)
+gameRouter.get('/games/genres/:genre', GameController.getGamesByGenre)
 gameRouter.get('/games/:id', GameController.getGameById)
 
 gameRouter.post('/games', GameController.createGame);

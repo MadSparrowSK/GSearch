@@ -23,7 +23,6 @@ class PostService {
         return await db.query(`select * from post where id = $1`, [id])
     }
 
-
     async create(post) {
         return await db.query(`INSERT INTO post(author, title, description, content, image, type, type_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
             [
@@ -60,7 +59,7 @@ class PostService {
         return await db.query(`DELETE FROM post WHERE id = $1 RETURNING *`, [id]);
     }
     async deleteAll() {
-
+        await db.query('DELETE FROM post');
     }
 }
 

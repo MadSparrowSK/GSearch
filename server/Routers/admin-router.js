@@ -1,17 +1,14 @@
 const {Router} = require('express')
-
+const AdminController = require('../PostgreSql/Controller/AdminController')
 
 const adminRouter = new Router();
 
-adminRouter.get('/admin', (req, res) => {
-    res.status(200).json({message: 'welcome to admin page'});
-})
-adminRouter.post('/admin', (req,res) => {
-    res.status(200).json({message: "OK"})
-})
+AdminController.reg = AdminController.reg.bind(AdminController);
+AdminController.login = AdminController.login.bind(AdminController);
+AdminController.deleteAccount = AdminController.deleteAccount.bind(AdminController);
 
-adminRouter.get('/admin/*', (req,res) => {
-    res.status(400).json({message:"ERROR 400 BAD REQUEST"})
-})
+adminRouter.post('/create',AdminController.reg)
+adminRouter.post('/login', AdminController.login)
+adminRouter.delete('/delete', AdminController.deleteAccount)
 
 module.exports = adminRouter;

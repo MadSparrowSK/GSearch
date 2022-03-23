@@ -25,7 +25,7 @@ app.use((req,res,next) => {
 
 app.use('/games-api', gameRouter);
 app.use('/posts-api', postsRouter);
-app.use(adminRouter);
+app.use('/admin', adminRouter);
 
 app.get('*', (req,res) => {
     res.status(400).json({message:"ERROR 400 BAD REQUEST"})
