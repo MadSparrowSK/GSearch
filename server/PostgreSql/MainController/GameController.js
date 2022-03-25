@@ -1,10 +1,9 @@
 const ErrorController = require('../../Error/ErrorController')
-const GetController = require('../MicroController/GetController')
 const CheckController = require('../MicroController/CheckController')
 const LinkController = require('../MicroController/LinkController')
+const GetController = require('../MicroController/GetController')
 
 const GameServiceCRUD = require('../MainService/GameServiceCRUD')
-const LinkService = require('../MicroService/LinkService')
 
 
 const parseGame = require('../utils/game/parseGame');
@@ -70,9 +69,59 @@ class GameController {
     async getGameById(req, res) {
         try {
             const {id} = req.params;
-            const req_db = await GameServiceCRUD.getById(id);
-            const game = req_db.rows[0];
-            res.status(200).json(game);
+
+            const req_game = await GetController.getGame(id);
+
+            const game_genre_binder = await GetController.getGenreBinderByGameId(id);
+            const game_genres = [];
+            for(let i = 0; i < game_genre_binder.length; ++i) {
+                const genre = await GetController.getGenreById(game_genre_binder[i].genre_id);
+                game_genres.push(genre);
+            }
+
+            const game_platform_binder = await GetController.getPlatformBinderByGameId(id);
+            const game_platforms = [];
+            for(let i = 0; i < game_platform_binder.length; ++i) {
+                const platform = await GetController.getPlatformById(game_platform_binder[i].platform_id);
+                game_platforms.push(platform);
+            }
+
+            const game_label_binder = await GetController.getLabelBinderByGameId(id);
+            const game_labels = [];
+            for(let i = 0; i < game_label_binder.label; ++i) {
+                const label = await GetController.getLabelById(game_label_binder[i].label_id);
+                game_labels.push(label);
+            }
+
+            const game_tag_binder = await GetController.getTagBinderByGameId(id);
+            const game_tags = [];
+            for(let i = 0; i < game_tag_binder.length; ++i) {
+                const tag = await GetController.getTagById(game_tag_binder[i].tag_id);
+                game_tags.push(tag);
+            }
+
+            const game_dev_binder = await GetController.getDeveloperBinderByGameId(id);
+            const game_devs = [];
+            for(let i = 0; i < game_dev_binder.length; ++i) {
+                const dev = await GetController.getDevById(game_dev_binder[i].game_dev_id);
+                game_devs.push(dev)
+            }
+
+            const game_pub_binder = await GetController.getPublisherBinderByGameId(id);
+            const game_pubs = []
+            for(let i = 0; i < game_pub_binder.length; ++i) {
+                const pub = await GetController.getPublisherById(game_pub_binder[i].game_pub_id);
+                game_pubs.push(pub);
+            }
+
+            req_game.genres = game_genres;
+            req_game.platforms = game_platforms;
+            req_game.labels = game_labels;
+            req_game.tags = game_tags;
+            req_game.developers = game_devs;
+            req_game.publishers = game_pubs;
+
+            res.status(200).json({...req_game});
         } catch (e) {
             console.log(e.message)
             ErrorController._500(req,res)
