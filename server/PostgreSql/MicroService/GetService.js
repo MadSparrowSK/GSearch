@@ -32,7 +32,7 @@ class GetService {
         return await db.query(`SELECT * FROM game_label WHERE label = $1`, [label])
     }
     async labelById(label_id) {
-        return await db.query(`SELECT * FROM game_label WHERE genre = $1`, [label_id])
+        return await db.query(`SELECT * FROM game_label WHERE id = $1`, [label_id])
     }
     async labelBinderByGameId(game_id) {
         return await db.query(`SELECT * FROM game_label_binder WHERE game_id = $1`, [game_id])

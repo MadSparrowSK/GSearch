@@ -88,7 +88,7 @@ class GameController {
 
             const game_label_binder = await GetController.getLabelBinderByGameId(id);
             const game_labels = [];
-            for(let i = 0; i < game_label_binder.label; ++i) {
+            for(let i = 0; i < game_label_binder.length; ++i) {
                 const label = await GetController.getLabelById(game_label_binder[i].label_id);
                 game_labels.push(label);
             }
