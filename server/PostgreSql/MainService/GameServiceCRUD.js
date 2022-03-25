@@ -1,6 +1,6 @@
 const db = require('../PostgreSQL')
 
-class GameService {
+class GameServiceCRUD {
     async getAll() {
         return await db.query('SELECT * FROM game');
     }
@@ -33,9 +33,16 @@ class GameService {
     async getById(id) {
         return await db.query(`SELECT * FROM game WHERE id = $1`, [id])
     }
-
     async create(game) {
-        return await db.query(`INSERT INTO game(name, description) VALUES ($1, $2)`, [game.name, game.description])
+        return await db.query(`
+                INSERT INTO game(name, description, content, requirements) 
+                VALUES ($1, $2, $3, $4) RETURNING *`,
+            [
+                game.name,
+                game.description,
+                game.content,
+                game.requirements
+            ])
     }
 
     async update(id,post) {
@@ -56,4 +63,4 @@ class GameService {
     }
 }
 
-module.exports = new GameService();
+module.exports = new GameServiceCRUD();

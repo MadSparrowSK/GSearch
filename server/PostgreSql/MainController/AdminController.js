@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const ErrorController = require('../../Error/ErrorController')
 
-const AdminService = require('../Service/AdminService')
+const AdminService = require('../MainService/AdminService')
 
 class AdminController {
     async reg(req, res) {

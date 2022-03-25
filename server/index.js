@@ -31,7 +31,6 @@ app.get('*', (req,res) => {
     res.status(400).json({message:"ERROR 400 BAD REQUEST"})
 })
 
-
 const start = async () => {
     try {
         app.listen(PORT, () => console.log(`Server is running on ${PORT} port`))

@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const PostController = require('../PostgreSql/Controller/PostController')
+const PostController = require('../PostgreSql/MainController/PostController')
 const postsRouter = new Router();
 
 postsRouter.get('/posts', PostController.getAllPosts)

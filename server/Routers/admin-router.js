@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const AdminController = require('../PostgreSql/Controller/AdminController')
+const AdminController = require('../PostgreSql/MainController/AdminController')
 
 const adminRouter = new Router();
 

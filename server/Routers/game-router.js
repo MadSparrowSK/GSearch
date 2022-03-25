@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const GameController = require('../PostgreSql/Controller/GameController')
+const GameController = require('../PostgreSql/MainController/GameController')
 
 const gameRouter = new Router();
 

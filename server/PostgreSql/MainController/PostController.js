@@ -1,4 +1,4 @@
-const PostService = require('../Service/PostService')
+const PostService = require('../MainService/PostService')
 const AdminController = require('./AdminController')
 const DbLimit = require('../utils/dbLimit')
 
